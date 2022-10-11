@@ -14,11 +14,9 @@ const server = http.createServer((req, res) => {
         })
         req.on('end', () => {
             const dados = Object.fromEntries(new URLSearchParams(body))
-			console.log(dados)
-			const data = new Date().toISOString().replaceAll(':', '').replaceAll('-', '').replace(/\..+/, '')
-            fs.writeFile(`Dados/${data}_${dados.nome}.json`, JSON.stringify(dados), (err) => {
+            fs.writeFile(`Dados/${dados.data}${dados.nome}.json`, JSON.stringify(dados), (err) => {
                 if (err) throw err
-                console.log(`Arquivo Dados/${data}_${dados.nome}.json salvo.`)
+                console.log(`Arquivo Dados/${dados.data}${dados.nome}.json salvo.`)
                 res.end(`<html><head><meta charset="utf-8"></head><body><h2>Obrigado por participar, ${dados.nome}! Aguarde a confirmação de sua participação por e-mail ou whatsapp. Chave pix para pagamento: Celular (35)99982-7930. Valor R$50,00. Boa Sorte!!!</h2></body></html>`)
             })
         })
